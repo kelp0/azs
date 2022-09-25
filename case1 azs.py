@@ -3,26 +3,26 @@ azs=open('azs.txt','r',encoding='UTF-8')
 inp=open('input.txt','r',encoding='UTF-8')
 list_azs = azs.readlines()
 prices = {'АИ-80': 45, 'АИ-92': 44, 'АИ-95': 50, 'АИ-98': 52}
-petrol = {'АИ-80': 0, 'АИ-92': 0, 'АИ-95': 0, 'АИ-98': 0}  # sold by one day per type of petrol
-cash = 0  # money our gas-station will get in the end
-unhappy_cars = 0  # for cars who will not be served
+petrol = {'АИ-80': 0, 'АИ-92': 0, 'АИ-95': 0, 'АИ-98': 0}
+cash = 0 
+unhappy_cars = 0 
 
-'''Getting information about our gas station'''
+
 for i in range(len(list_azs)):
     list_azs[i] = list_azs[i].split()
     list_azs[i][0] = int(list_azs[i][0])
     list_azs[i][1] = int(list_azs[i][1])
 list_input = list(map(lambda x: x.strip(), inp.readlines()))
-"""Getting information about cars in the queue"""
+
 for i in range(len(list_input)):
     list_input[i] = list_input[i].split()
     list_input[i][1] = int(list_input[i][1])
-azs_stars = {list_azs[i][0]: 0 for i in range(len(list_azs))}  # we will fill 0 with number of '*'s
+azs_stars = {list_azs[i][0]: 0 for i in range(len(list_azs))}
 azs_places = {list_azs[i][0]: list_azs[i][1] for i in range(len(list_azs))}
 
 
 def get_time(times, minutes=0):
-    """Turning times into integer of minutes"""
+
     times = times.split(':')
     hours = int(times[0])
     minutes_1 = int(times[1])
@@ -31,7 +31,7 @@ def get_time(times, minutes=0):
 
 
 def get_time_back(minutes):
-    """Turning minutes into daytime back"""
+
     string = ''
     hours = minutes // 60
     minutes_left = minutes - hours * 60
@@ -47,7 +47,7 @@ def get_time_back(minutes):
 
 
 def filling_with_random(liters):
-    """This function get number liters and return minutes it will long to replenish"""
+
     adding = random.randint(-1, 1)
     if liters % 10 == 0:
         if liters // 10 + adding != 0:
@@ -62,7 +62,7 @@ def filling_with_random(liters):
 
 
 def condition():
-    """Print the condition of every gas station after the new car comes"""
+
     for i in range(len(list_azs)):
         print('Автомат №' + str(list_azs[i][0]) + ' максимальная очередь: '
               + str(list_azs[i][1]) + ' Марки бензина: ' + ' '.join(list_azs[i][2::]) + ' ->' + azs_stars[
@@ -73,7 +73,7 @@ def condition():
 
 
 def action_coming(i, type_petrol, number_of_gas):
-    """This function activates when the new car is coming"""
+
     print('В ' + str(i[0]) + ' новый клиент: ' + str(i[0]) + ' ' + type_petrol + ' ' + str(
         i[1]) + ' ' + str(time_to_replenish) + ' встал в очередь к автомату №' + str(
         number_of_gas))
@@ -119,7 +119,7 @@ for minute in range(1, (24 * 60) + 1):
 
 
 def final_answer(petrol, prices, unhappy_cars):
-    """This function prints final answer"""
+
     print("Количество литров, проданное за сутки по каждой марке бензина:", petrol)
     b = {k: v * petrol[k] for k, v in prices.items() if k in petrol}
     print("Продажи по каждой марке бензина:", b)
