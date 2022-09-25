@@ -1,3 +1,4 @@
+Работу выполниили: Скороходов М. 80%, Лысенко М. 60%, Ячин Д. 30%
 import random
 azs=open('azs.txt','r',encoding='UTF-8')
 inp=open('input.txt','r',encoding='UTF-8')
